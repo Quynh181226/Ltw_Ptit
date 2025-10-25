@@ -1,19 +1,26 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
+
 package controller;
 
-import java.io.*;
-import jakarta.servlet.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+import java.io.*;
 
-@WebServlet("/SaveTextServlet")
+@WebServlet("/save")
 public class SaveTextServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String content = request.getParameter("content");
-        String path = getServletContext().getRealPath("/GhiFile.txt");
-        try (PrintWriter pw = new PrintWriter(new FileWriter(path))) {
-            pw.print(content);
+        String fileName = "Ghifile.txt";
+        String filePath = getServletContext().getRealPath("/") + fileName;
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write(content);
         }
-        request.getRequestDispatcher("success.jsp").forward(request, response);
+        request.setAttribute("fileName", fileName);
+        request.getRequestDispatcher("result1.jsp").forward(request, response);
     }
 }

@@ -1,12 +1,16 @@
+<%-- 
+    Document   : result
+    Created on : Aug 11, 2025, 10:01:40 AM
+    Author     : TRANG
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Kết quả</title>
+    <title>Kết quả đọc file</title>
 </head>
 <body>
-    <h2>Nội dung file:</h2>
-    <pre><%= request.getAttribute("content") %></pre>
-    <a href="index.jsp">Trở lại</a>
+<h2>Nội dung file:</h2>
+<p>${fileContent}</p>
 </body>
 </html>

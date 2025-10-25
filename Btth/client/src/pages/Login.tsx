@@ -59,31 +59,39 @@ export default function Login() {
 
             // if (login.fulfilled.match(res)) {
             //     toast.success("Login success!!");
-                setTimeout(() => {
-                    if (res.role === "admin") {
-                        navigate("/categoryManagement");
-                    } else {
-                        navigate("/dashboard");
-                    }
-                }, 2000);
+            setTimeout(() => {
+                if (res.role === "admin") {
+                    navigate("/categoryManagement");
+                } else {
+                    // navigate("/dashboard");
+                    navigate("/homePage");
+                }
+            }, 2000);
             // }
 
 
-        } catch (err) {
+        } catch (err: any) {
 
             // Server error
+
             // toast.error("Login failed!!");
 
-            toast.error("Login failed!!");
             console.error("Login error:", err);
 
+            if (err.message) {
+                toast.error(err.message);
+            } else if (typeof err === 'string') {
+                toast.error(err);
+            } else {
+                toast.error("Đăng nhập thất bại!!");
+            }
         }
     };
     return (
         <div className="min-h-screen bg-gradient-to-tl from-[#d4d7e2]/95 via-[#f2f3f7]/60 to-white/80 backdrop-blur-sm flex items-center">
             {loading && <LoadingProcess />}
             {/*{errors.login && <div className="mb-4 text-red-600 text-sm">{errors.login}</div>}*/}
-            {error && <div className="mb-4 text-red-600 text-sm">{error}</div>}
+            {/*{error && <div className="mb-4 text-red-600 text-sm">{error}</div>}*/}
             <div className="flex flex-col sm:flex-row p-5 gap-[10px] font-['FS_PF_BeauSans_Pro'] w-full mx-auto items-center sm:items-start">
                 <div className="hidden sm:flex relative w-[80%] h-[95vh] rounded-3xl overflow-hidden flex-col items-center bg-cover bg-center bg-no-repeat">
                     <img src={ImgPtit} alt="Bg" className="absolute w-[80%] h-full left-5 rounded-3xl object-cover"/>
@@ -111,28 +119,28 @@ export default function Login() {
                             </div>
                         </div>
                         <span className="text-[28px] sm:text-[32px] font-bold text-[#3D3D3D] block text-center sm:text-left">
-Đăng Nhập
-</span>
+                        Đăng Nhập
+                        </span>
                         <span className="block text-sm text-[#676767] text-center sm:text-left mt-1">
-Đăng nhập tài khoản để truy cập vào UniLife Hub nào !!
-</span>
+                        Đăng nhập tài khoản để truy cập vào UniLife Hub nào !!
+                        </span>
                         <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-[10px] mt-6">
                             <label htmlFor="email1" className="block text-sm font-medium text-gray-700">
                                 Email
                             </label>
                             <div className="flex items-center mt-1">
-<span className="flex items-center justify-center bg-[#6a7698] px-3 py-3.5 rounded-l-md">
-<FontAwesomeIcon icon={faEnvelope} className="text-[#f4eeee]"/>
-</span>
+                            <span className="flex items-center justify-center bg-[#6a7698] px-3 py-3.5 rounded-l-md">
+                            <FontAwesomeIcon icon={faEnvelope} className="text-[#f4eeee]"/>
+                            </span>
                                 <input type="email" id="email1" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Nhập email" className="w-full border border-gray-300 rounded-r-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#6a7698]"/>
                             </div>
                             <label htmlFor="password" className="block text-sm font-medium text-gray-700 mt-3">
                                 Mật khẩu
                             </label>
                             <div className="flex items-center mt-1">
-<span className="flex items-center justify-center bg-[#6a7698] px-3 py-3.5 rounded-l-md">
-<FontAwesomeIcon icon={faKey} className="text-[#f4eeee]"/>
-</span>
+                                <span className="flex items-center justify-center bg-[#6a7698] px-3 py-3.5 rounded-l-md">
+                                <FontAwesomeIcon icon={faKey} className="text-[#f4eeee]"/>
+                                </span>
                                 <div className="relative w-full">
                                     <input type={showPassword ? "text" : "password"} id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Nhập mật khẩu" className="w-full border border-gray-300 rounded-r-md px-3 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-[#6a7698]"/>
                                     <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"/>
@@ -160,8 +168,8 @@ export default function Login() {
                     </div>
                 </div>
             </div>
-            </div>
-            )
+        </div>
+    )
 
 }
 
