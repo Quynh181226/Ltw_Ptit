@@ -177,7 +177,9 @@ const userSlice = createSlice({
             //     localStorage.removeItem("currentUser");
             // })
             .addCase(logout.fulfilled, (state, action) => {
-                const updated = action.payload as { id: number; active: boolean; inactive: boolean; waiting: boolean };
+                const updated = action.payload as unknown as { id: number; active: boolean; inactive: boolean; waiting: boolean };
+
+                // const updated = action.payload as { id: number; active: boolean; inactive: boolean; waiting: boolean };
                 const user = state.users.find(u => u.id === updated.id);
 
                 if (user) {

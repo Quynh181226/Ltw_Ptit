@@ -97,7 +97,7 @@ const StudentManagement = () => {
         if (selectedUser) {
             await dispatch(
                 updateUserStatus({
-                    id: selectedUser.id,
+                    id: Number(selectedUser.id),
                     active,
                     suspended,
                     waiting,
